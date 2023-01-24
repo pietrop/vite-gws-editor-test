@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@googleforcreators/element-library": "0.1.202301231653",
+    "@googleforcreators/elements": "0.1.202301231653",
     "@googleforcreators/output": "0.1.202301231653",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

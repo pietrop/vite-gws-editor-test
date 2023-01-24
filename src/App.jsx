@@ -2,7 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 // import Editor from "./Editor.jsx"; 
 import { OutputStory } from '@googleforcreators/output';
+import { registerElementType } from '@googleforcreators/elements';
+import { elementTypes } from '@googleforcreators/element-library';
+//  npm i @googleforcreators/react  --legacy-peer-deps 
+// https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/react/src/renderToStaticMarkup.ts#L38
+// import { renderToStaticMarkup } from '@googleforcreators/react'
+// https://reactjs.org/docs/react-dom-server.html#rendertostaticmarkup
+// 
+import { renderToStaticMarkup } from 'react-dom/server';
 import './App.css'; 
+// https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/output/src/test/story.js#L31
+elementTypes.forEach(registerElementType);
 
 const props = {
   id: '123',
@@ -82,10 +92,10 @@ const props = {
           content: "Hello world 2",
           // content: '<span style="font-weight: 400">Hello World</span>',
           // color: { type: 'solid', color: { r: 255, g: 255, b: 255 } },
-          // padding: {
-          //   horizontal: 0,
-          //   vertical: 0,
-          // },
+          padding: {
+            horizontal: 0,
+            vertical: 0,
+          },
           font: {
             // family: 'Lato',
             service: 'fonts.google.com',
@@ -109,7 +119,16 @@ const flags={
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  const content = renderToStaticMarkup(  <OutputStory
+    story={props.story}
+    pages={props.pages}
+    metadata={props.metadata}
+    flags={flags}
+  />);
+
+  console.log(content)
 
   return (
     <div className="App">
@@ -133,15 +152,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <OutputStory
-        // story={story}
-        story={props.story}
-        // pages={pages}
-        pages={props.pages}
-        // metadata={metadata}
-        metadata={props.metadata}
-        flags={flags}
-      />
+    {content}
     </div>
   )
 }
