@@ -1,24 +1,22 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 // import Editor from "./Editor.jsx"; 
-import { OutputStory } from '@googleforcreators/output';
+import { getStoryMarkup } from '@googleforcreators/output';
 import { registerElementType } from '@googleforcreators/elements';
 import { elementTypes } from '@googleforcreators/element-library';
-//  npm i @googleforcreators/react  --legacy-peer-deps 
-// https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/react/src/renderToStaticMarkup.ts#L38
-// import { renderToStaticMarkup } from '@googleforcreators/react'
-// https://reactjs.org/docs/react-dom-server.html#rendertostaticmarkup
-// 
-import { renderToStaticMarkup } from 'react-dom/server';
+
 import './App.css'; 
 // https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/output/src/test/story.js#L31
 elementTypes.forEach(registerElementType);
 
+// https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/elements/src/types/story.ts
+// https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/elements/src/types/page.ts
+// https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/elements/src/types/element.ts
 const props = {
   id: '123',
   backgroundColor: { type: 'solid', color: { r: 255, g: 255, b: 255 } },
   story: {
-    title: 'Example',
+    title: 'McCarthy Gains Ground in Speaker Bid but Still Short',
     slug: 'example',
     status: 'publish',
     author: { id: 1, name: 'John Doe' },
@@ -27,14 +25,14 @@ const props = {
     excerpt: '123',
     featuredMedia: {
       id: 123,
-      url: 'https://example.com/poster.png',
+      url: 'https://bloximages.newyork1.vip.townnews.com/news-journal.com/content/tncms/assets/v3/editorial/b/43/b43383c6-8c7a-11ed-9a51-cf5e4ac0f98d/63b5f659e7517.image.jpg?resize=1200%2C956',
       width: 640,
       height: 853,
     },
     fonts: {},
     publisherLogo: {
       id: 1,
-      url: 'https://example.com/logo.png',
+      url: 'https://blog.logomyway.com/wp-content/uploads/2021/10/new-york-times-symbol.jpg',
       height: 0,
       width: 0,
     },
@@ -45,13 +43,11 @@ const props = {
   pages: [
     {
       id: '123',
-      animations: [
-        { id: 'anim1', targets: ['123'], type: 'bounce', duration: 1000 },
-        { id: 'anim1', targets: ['124'], type: 'spin', duration: 500 },
-      ],
+      // https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/patterns/src/types.ts#L72
       backgroundColor: {
         type: 'solid',
-        color: { r: 255, g: 255, b: 255 },
+        // https://github.com/GoogleForCreators/web-stories-wp/blob/2f21b00d44a954a63794988da0740ab33c6d1a7f/packages/patterns/src/types.ts#L30
+        color: { r: 0, g: 0, b: 225 },
       },
       page: {
         id: '123',
@@ -60,49 +56,53 @@ const props = {
         {
           type: 'text',
           id: '123',
-          x: 50,
-          y: 100,
-          height: 1920,
-          width: 1080,
+          // x: 50,
+          // y: 400,
+          // height: 1920,
+          // width: 1080,
+          height: 300,
+          width: 300,
           rotationAngle: 0,
-          content: "Hello world",
-          // content: '<span style="font-style: italic">Hello World</span>',
+          // content: "Hello world1",
+          content: '<span style="font-weight: bold; color: white">Why has there been so many votes?</span>',
           // color: { type: 'solid', color: { r: 255, g: 255, b: 255 } },
           padding: {
             horizontal: 0,
             vertical: 0,
           },
           font: {
-            // family: 'Roboto',
+            family: 'Roboto',// 
             service: 'fonts.google.com',
-          //   variants: [
-          //     [0, 400],
-          //     [1, 400],
-          //   ],
+            variants: [
+              [0, 400],
+              [1, 400],
+            ],
           },
         },
         {
           type: 'text',
           id: '124',
           x: 50,
-          y: 100,
-          height: 1920,
-          width: 1080,
+          y: 450,
+          // height: 1920,
+          // width: 1080,
+          height: 300,
+          width: 300,
           rotationAngle: 0,
-          content: "Hello world 2",
-          // content: '<span style="font-weight: 400">Hello World</span>',
-          // color: { type: 'solid', color: { r: 255, g: 255, b: 255 } },
+          // content: "It’s immensely satisfying when you realize that a commonly bought item is easily prepared at home. Take bagels, for instance. This guide will explain how to make them, from mixing to forming, boiling to baking.",
+          content: '<span style="color:white; overflow-wrap: break-word; width:100%">It’s immensely satisfying when you realize that a commonly bought item is easily prepared at home. Take bagels, for instance. This guide will explain how to make them, from mixing to forming, boiling to baking.</span>',
+          color: { type: 'solid', color: { r: 255, g: 255, b: 255 } },
           padding: {
             horizontal: 0,
             vertical: 0,
           },
           font: {
-            // family: 'Lato',
+            family: 'Lato',
             service: 'fonts.google.com',
-          //   variants: [
-          //     [0, 400],
-          //     [1, 400],
-          //   ],
+            variants: [
+              [0, 400],
+              [1, 400],
+            ],
           },
         },
       ],
@@ -121,14 +121,28 @@ const flags={
 function App() {
   const [count, setCount] = useState(0);
 
-  const content = renderToStaticMarkup(  <OutputStory
-    story={props.story}
-    pages={props.pages}
-    metadata={props.metadata}
-    flags={flags}
-  />);
+ const content = getStoryMarkup(props.story, props.pages, props.metadata, flags)
 
   console.log(content)
+
+  const openPreviewLink = async () => {
+    // await saveStory();
+
+    const previewLink = window.origin + "/preview";
+
+    // Start a about:blank popup with waiting message until saving operation
+    // is done. That way, we will not bust the popup timeout.
+    try {
+      const popup = window.open("about:blank", "story-preview");
+     
+      if (popup) {
+        popup.document.write(content)
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
 
   return (
     <div className="App">
@@ -141,18 +155,9 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    {content}
+    
+      <button onClick={openPreviewLink}>Preview</button><br/><br/>
+   <textarea style={{width:"80vw", height:"100vh"}}>{content}</textarea> 
     </div>
   )
 }
